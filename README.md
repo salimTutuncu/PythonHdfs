@@ -45,8 +45,6 @@ It's now part of Apache HAWQ (incubating), a pure C++ library developed by Pivot
 #### Python Interfaces
 hdfs3, a pure Python interface to libhdfs3 that uses ctypes to avoid C extensions. It provides a Python file interface and access to the rest of the libhdfs3 functionality:
 
-### 3. Snakebite
-* a pure Python implementation of Hadoop's protobuf RPC interface, created by Spotify.
-* Snakebite requires python2 (python3 is not supported yet) and python-protobuf 2.4.1 or higher.
-* copyFromLocal not implemented, so Snakebite supports only download (no upload)..
-* Snakebite does not offer a comprehensive client API (e.g. it cannot write files) and has worse performance (being implemented in pure Python), 
+
+## Conclusion
+* Chosing the right python library is highly depends our requirement. If we want to test some small thing then we can go for  hdfscli, if we are looking something for production use, then we have 2 different options; libhdfs and libhdfs3. Both of them has their own advantages and disadvantages. libhdfs3 is more light-weight and easy to use, on the otherhand libhdfs throughput is better than libhdfs3, so for example if we don't need very high throughput for our application we can choose libhdfs3 otherwise, libhdfs would be better option. 
