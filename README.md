@@ -1,6 +1,6 @@
 # PythonHdfs
 
-Python has some WebHDFS interfaces like
+Python has some WebHDFS interfaces like:
 
 1. pywebhdfs
 2. hdfscli
@@ -15,39 +15,36 @@ Some of the features:
 
 For light load applications, WebHDFS and native protobuf RPCs provide comparable data throughput, but native connectivity is generally considered to be more scalable and suitable for production use.
 
-Native RPC access in Python
+## Native RPC access in Python
 
-1.libhdfs (The "official" way in Apache Hadoop to connect natively to HDFS from a C-friendly language like Python is to use )
+1. libhdfs (The "official" way in Apache Hadoop to connect natively to HDFS from a C-friendly language like Python is to use )
 
-Advantages
--A primary benefit of libhdfs is that it is distributed and supported by major Hadoop vendors, and it's a part of the Apache Hadoop project.
--libhdfs, despite being Java and JNI-based, achieves the best throughput in this tests.
--
-Disadvantages
--A downside is that it uses JNI (spawning a JVM within a Python process) and requires a complete Hadoop Java distribution on the client side. (To use libhdfs, users must deploy the HDFS jars on every machine.)
+### Advantages
+* A primary benefit of libhdfs is that it is distributed and supported by major Hadoop vendors, and it's a part of the Apache Hadoop project.
+* libhdfs, despite being Java and JNI-based, achieves the best throughput in this tests.
 
-Python Interfaces
+### Disadvantages
+* A downside is that it uses JNI (spawning a JVM within a Python process) and requires a complete Hadoop Java distribution on the client side. (To use libhdfs, users must deploy the HDFS jars on every machine.)
+
+### Python Interfaces
 -cyhdfs (using Cython), libpyhdfs (plain Python C extension), and pyhdfs (using SWIG).
 
-Due to the heavier-weight nature of libhdfs, alternate native interfaces to HDFS have been developed.
 
-2.libhdfs3 (now part of Apache HAWQ (incubating), a pure C++ library developed by Pivotal Labs for use in the HAWQ SQL-on-Hadoop system. )
+2. libhdfs3 (now part of Apache HAWQ (incubating), a pure C++ library developed by Pivotal Labs for use in the HAWQ SQL-on-Hadoop system. )
 
-easy to switch between one driver and the other with a keyword argument in Python: (libhdfs, libhdfs3)
+### Advantages:
+* Light-weight
+* It gets rid of the drawbacks of JNI
+* it is easy to use and deploy.
 
-Advantages:
-- Light-weight
-- It gets rid of the drawbacks of JNI
-- it is easy to use and deploy.
+### Disadvantages:
+* libhdfs3 performs poorly in small size reads.
 
-Disadvantages:
--libhdfs3 performs poorly in small size reads.
-
-Python Interfaces
+### Python Interfaces
 hdfs3, a pure Python interface to libhdfs3 that uses ctypes to avoid C extensions. It provides a Python file interface and access to the rest of the libhdfs3 functionality:
 
-3.Snakebite
--snakebite: a pure Python implementation of Hadoop's protobuf RPC interface, created by Spotify.
--Snakebite requires python2 (python3 is not supported yet) and python-protobuf 2.4.1 or higher.
--copyFromLocal not implemented, so Snakebite supports only download (no upload)..
--Since snakebite does not offer a comprehensive client API (e.g. it cannot write files) and has worse performance (being implemented in pure Python), 
+3. Snakebite
+* a pure Python implementation of Hadoop's protobuf RPC interface, created by Spotify.
+* Snakebite requires python2 (python3 is not supported yet) and python-protobuf 2.4.1 or higher.
+* copyFromLocal not implemented, so Snakebite supports only download (no upload)..
+* Snakebite does not offer a comprehensive client API (e.g. it cannot write files) and has worse performance (being implemented in pure Python), 
