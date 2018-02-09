@@ -49,5 +49,5 @@ hdfs3, a pure Python interface to libhdfs3 that uses ctypes to avoid C extension
 ## Conclusion
 * Chosing the right python library is highly depends our requirement. If we want to test some small thing then we can go for  hdfscli, if we are looking something for production use, then we have 2 different options; libhdfs and libhdfs3. Both of them has their own advantages and disadvantages. libhdfs3 is more light-weight and easy to use, on the otherhand libhdfs throughput is better than libhdfs3, so for example if we don't need very high throughput for our application we can choose libhdfs3 otherwise, libhdfs would be better option. 
 
-Note: Apart from those libraries mentioned above there is also another nice library called *Snakebite* but since Snakebite supports only download it's not listed in. (copyFromLocal not implemented) 
+**Note:** Apart from those libraries mentioned above there is also another nice library called *Snakebite* but since Snakebite supports only download it's not listed in. (copyFromLocal not implemented) 
 (see https://github.com/spotify/snakebite/issues/37)
